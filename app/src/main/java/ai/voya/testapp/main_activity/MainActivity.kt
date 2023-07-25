@@ -5,32 +5,25 @@ import android.graphics.Color
 import android.graphics.drawable.ShapeDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var mainAdapter: MainActivityAdapter
-    private lateinit var mainActivityPresenter: MainActivityPresenter
+    private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainAdapter = MainActivityAdapter(this)
+        configureUI()
+    }
 
-        binding.recyclerView.apply {
-            adapter = mainAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            divider.setDrawable(ShapeDrawable().apply {
-                paint.color = Color.GRAY
-                intrinsicHeight = 1
-            })
-            addItemDecoration(divider)
+    private fun configureUI() {
+        binding.composeView.setContent {
+            // TODO: Add and configure views here
         }
     }
 }

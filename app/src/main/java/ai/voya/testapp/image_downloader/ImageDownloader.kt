@@ -9,7 +9,7 @@ import java.io.IOException
 import java.net.URL
 
 interface ImageDownloader {
-    fun downloadImage(url: URL, completion: (Result<Drawable>) -> Unit)
+    fun downloadImage(url: URL, completion: (Result<Drawable?>) -> Unit)
 }
 
 class DefaultImageDownloader(val cache: ImageCache): ImageDownloader {
@@ -17,7 +17,7 @@ class DefaultImageDownloader(val cache: ImageCache): ImageDownloader {
     private val client = OkHttpClient()
     private val mainThreadHandler = Handler(Looper.getMainLooper())
 
-    override fun downloadImage(url: URL, completion: (Result<Drawable>) -> Unit) {
+    override fun downloadImage(url: URL, completion: (Result<Drawable?>) -> Unit) {
         val image = cache.getImage(url.toString())
         image?.let {
             completion(Result.success(image))
